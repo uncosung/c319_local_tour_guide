@@ -11,7 +11,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
-
 const styles = theme => ({
   marginTop: {
     marginTop: theme.spacing(3)
@@ -25,7 +24,7 @@ const styles = theme => ({
   media: {
     height: 0,
     paddingTop: '56.25%'
-  },
+  }
 });
 
 class SearchPackages extends Component {
@@ -74,7 +73,7 @@ class SearchPackages extends Component {
                 </IconButton>
                 <IconButton aria-label="Share">
                   <ShareIcon />
-                </IconButton> 
+                </IconButton>
               </CardActions>
             </Card>
             </>

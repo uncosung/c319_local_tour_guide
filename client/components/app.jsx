@@ -52,7 +52,7 @@ class App extends Component {
           </div>
           : null
         }
-    
+
         {this.state.view.name === 'userProfile'
           ? <div>
             <UserProfile view={this.setView} user={ this.state.user }/>
