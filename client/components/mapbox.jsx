@@ -44,18 +44,15 @@ class Mapbox extends Component {
                     tuurs: tuurs
                 }, this.fetchLocation)
             })
-        console.log(this.props)
     }
     fetchLocation() {
-        console.log('stateystatestate', this.state)
         this.state.tuurs.map(tuur => {
             fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${tuur.location}.json?access_token=${token}`)
                 .then(res => res.json())
                 .then((result) => {
-                    console.log(result);
                     this.setState ({
                         fetchCoordinates: [...this.state.fetchCoordinates, [tuur, result.features[0].center]]
-                    }, () => console.log('these are the coordinates', this.state))
+                    })
                 })
         })
         fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.props.location.name}.json?access_token=${token}`)
@@ -83,7 +80,6 @@ class Mapbox extends Component {
                 matchingFeatures.push(feature);
                 }
         }
-        console.log(matchingFeatures)
         return matchingFeatures
     }
     handleViewPortChange (viewport) {
@@ -101,7 +97,6 @@ class Mapbox extends Component {
         });
     };
     handleOnResult (event) {
-        console.log(event);
         this.setState ({
             searchResultLayer: new GeoJsonLayer({
                 id: 'search-result',
@@ -120,7 +115,6 @@ class Mapbox extends Component {
     
     render () {
         const markerMap = this.state.fetchCoordinates.map(marker => {
-            console.log(marker);
             return(
                 <Marker key={marker[0].id} latitude={marker[1][1]} longitude={marker[1][0]}>
                     <div>{marker[0].title}</div>
@@ -135,7 +129,7 @@ class Mapbox extends Component {
                     {...viewport}
                     onViewportChange= {this.handleViewPortChange}
                     mapboxApiAccessToken = {token}
-                    transitionInterpolator = {new FlyToInterpolator()}
+                    // transitionInterpolator = {new FlyToInterpolator()}
                 >
                     <ReactGeocoder
                         mapRef = {this.mapRef}
@@ -143,7 +137,7 @@ class Mapbox extends Component {
                         onViewportChange = {this.handleGeocoderViewportChange}
                         mapboxApiAccessToken={token}
                         position = 'top-left'
-                        localGeocoder = {this.forwardGeocoder}
+                        // localGeocoder = {this.forwardGeocoder}
                     />
                     {markerMap}
                     <DeckGL {...viewport} layers={[searchResultLayer]} />
