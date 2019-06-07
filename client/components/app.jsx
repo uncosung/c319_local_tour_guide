@@ -24,13 +24,13 @@ class App extends Component {
     super(props);
     this.state = {
       // view: {
-        //   name: 'searchResult'
-        // },
-        user: {},
-        location: []
-      };
-      // this.setView = this.setView.bind(this);
-      this.handleSearch = this.handleSearch.bind(this);
+      //   name: 'searchResult'
+      // },
+      user: {},
+      location: []
+    };
+    // this.setView = this.setView.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   // setView(name, user, location) {
@@ -46,11 +46,11 @@ class App extends Component {
   //     this.setState({ view, user });
   //   }
   // }
-  handleSearch(prop){
-    console.log('searched')
+  handleSearch(prop) {
+    console.log('searched');
     this.setState({
       location: prop
-    }, () => console.log(this.state.location))
+    }, () => console.log(this.state.location));
   }
 
   render() {
