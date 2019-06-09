@@ -56,12 +56,6 @@ class App extends Component {
 
   render() {
     return (
-    // <Router>
-    //   <div>
-    //     <Route path="/" component={CreatePackage} />
-    //     <BottomNav />
-    //   </div>
-    // </Router>
 
       <div>
         {this.state.view.name === 'mapResults' &&

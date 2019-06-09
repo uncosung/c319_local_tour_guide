@@ -101,6 +101,10 @@ const styles = theme => ({
     '&:hover': {
       opacity: 1
     }
+  },
+  cover: {
+    width: '100%',
+    height: '100%'
   }
 });
 
@@ -112,7 +116,8 @@ class PackageDetails extends Component {
       newDates: [],
       dates: [],
       images: [],
-      cardImg: this.props.item.mainImage
+      cardImg: this.props.item.mainImage,
+      package: null
     };
     this.clickHandler = this.clickHandler.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
@@ -233,15 +238,23 @@ class PackageDetails extends Component {
     return 1;
   }
   componentDidMount() {
+
     let images = JSON.parse(this.props.item.images);
     let mainImage = this.props.item.mainImage;
     images.unshift(mainImage);
     this.setState({ images });
+    fetch(`api/profile.php?email=${this.props.item.profileEmail}`)
+      .then(res => res.json())
+      .then(response => {
+        this.setState({ package: response }, () => console.log(response));
+        console.log('this.state.package on componentDidMount:', this.state.package);
+      });
   }
   render() {
     const { classes } = this.props;
     this.unavailableDates();
-    console.log(this.props.item);
+    console.log('this.props', this.props.item);
+    console.log('this.state', this.state.package);
     return (
             <>
             <Card className={classes.card}>
@@ -274,16 +287,44 @@ class PackageDetails extends Component {
             <CardContent>
               <LocationOn /> { this.props.item.location }
             </CardContent>
-            {/* <CardContent>
-              TRIP DURATION
-              <Alarm/> { timeRange }
-            </CardContent> */}
             <CardContent>
-              <Typography paragraph>Trip:</Typography>
+              <Alarm/> Trip duration: { this.props.item.timeRange }
+            </CardContent>
+            <CardContent>
+              <Typography paragraph>Trip Summary:</Typography>
               <Typography paragraph>
                 { this.props.item.description }
               </Typography>
             </CardContent>
+            <CardContent>
+              <Card className={classes.card}>
+                <Grid container>
+                  <Grid item xs={4}>
+                    <CardMedia
+                      className={classes.cover}
+                      image={ this.state.package ? this.state.package.image : null}
+                    />
+                  </Grid>
+                  <Grid item xs={8}>
+                    <CardContent>
+                      <Typography variant="body1">
+                        Meet your Guide
+                      </Typography>
+                      <Typography variant="h5">
+                        {this.state.package ? this.state.package.name : null }
+                      </Typography>
+                    </CardContent>
+
+                    <CardContent>
+                      <Typography variant="subtitle1" color="textSecondary">
+                        {this.state.package ? this.state.package.bio : null}
+                      </Typography>
+                    </CardContent>
+                  </Grid>
+                </Grid>
+              </Card>
+            </CardContent>
+
             <Grid justify="center" container>
               <Grid container justify="center" >
                 <ThemeProvider theme={theme}>

@@ -60,8 +60,8 @@ class SearchPackages extends Component {
     const { name, item } = this.state.view;
     return (
       <>
-        { name === 'detail'
-            && <PackageDetails item={ item } view={ this.setView} appView={ this.props.appView } />
+        { name === 'detail' &&
+            <PackageDetails item={ item } view={ this.setView} appView={ this.props.appView } />
         }
         { name === 'result' &&
             <>
