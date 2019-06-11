@@ -103,7 +103,7 @@ class EditProfile extends Component {
 
   componentDidMount() {
     let { name, email, location, image, bio } = this.props.user;
-    
+
     this.setState({
       name: name,
       email: email,
@@ -115,7 +115,7 @@ class EditProfile extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props)
+    console.log(this.props);
     return (
             <>
             <Container className={classes.marginBottom} >
